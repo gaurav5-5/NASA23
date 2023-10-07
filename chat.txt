@@ -1,1 +1,3 @@
 <script src="https://kit.fontawesome.com/52a68816aa.js" crossorigin="anonymous"></script>
+
+remember to change app.py from feedback to index again
