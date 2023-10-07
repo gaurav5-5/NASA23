@@ -1,11 +1,34 @@
+<!DOCTYPE html>
+<html>
 <head>
     <title>{{ title }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
-    {% include 'scripts.html' %}
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/52a68816aa.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
-    {% include 'nav.html' %}
-    <div class="App">
+    <header class="bg-gray-800 text-white flex justify-between items-center px-4 py-3">
+        <div>
+            <a href="#" class="font-bold text-xl">FireForcasters</a>
+        </div>
+        <nav class="ml-auto">
+            <ul class="flex space-x-4">
+                <li><a href="#" class="hover:text-gray-300">Home</a></li>
+                <li><a href="#" class="hover:text-gray-300">Protocol</a></li>
+                <li><a href="#" class="hover:text-gray-300">About</a></li>
+            </ul>
+        </nav>
+        <div class="dropdown">
+            <button class="dropbtn"><i class="fa-solid fa-bars" alt="menu"></i></button>
+            <div class="dropdown-content">
+                <a href="#">About</a>
+                <a href="#">Feedback</a>
+            </div>
+        </div>
+    </header>
+    <!-- <div class="App">
         <header class="App-header">
             <img src="{{ url_for('static', filename='Octocat.png') }}" class="App-logo" alt="logo" />
             <p>
@@ -20,6 +43,27 @@
                     </button>
                 </form>
         </header>
-    </div>
+    </div> -->
+
+    <footer class="bg-gray-800 text-white py-4 fixed bottom-0 w-full">
+        <div class="container mx-auto flex justify-between items-center">
+            <div>
+                <p>&copy; 2023 FireForcasters</p>
+            </div>
+            <div>
+                <ul class="flex space-x-4">
+                    <!-- <li><a class="hover:text-gray-300">Privacy Policy</a></li>
+                    <li><a class="hover:text-gray-300">Terms of Service</a></li> -->
+                    <li>
+                        <a class="hover:text-gray-300">Contact Us -&nbsp;Ph.: 1234567890 &nbsp;&nbsp; email: abc@gmail.com</a>
+                        <!-- <p>
+                            Ph.: 1234567890
+                            email: abc@gmail.com
+                        </p> -->
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
