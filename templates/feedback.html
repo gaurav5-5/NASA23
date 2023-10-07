@@ -1,34 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='feedback.css') }}">
     {% include 'scripts.html' %}
 </head>
+
 <body>
     {% include 'nav.html' %}
-    
-    <h1 class="px-4">Send us your Feedback!</h1>
-    <form action="" method="post" class="fd-form">
-        <div class="grid gap-6 mx-auto">
-            <div class="">
-                <label for="name">Name:</label>
-                <input type="text" name="fd-name" id="name" class="border border-gray-300 text-sm rounded-sm focus:border-blue-500 focus:ring-blue-500 block pl-10 p-2.5" placeholder="John Doe" required>
+
+
+    <div class="w-full max-w-md md:max-w-xl">
+        <h1 class="px-4 py-2 text-2xl">Send us your Feedback!</h1>
+        <form class="px-8 pt-6 pb-5 mb-3" method="post" action="">
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="fd-name">
+                    Name
+                </label>
+                <input name="fd-name"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="fd-name" type="text" placeholder="John Doe" required>
             </div>
-            <div class="">
-                <label for="email">Email:</label>
-                <input type="email" name="fd-email" id="email" class="border border-gray-300 text-sm rounded-sm focus:border-blue-500 focus:ring-blue-500 block pl-10 p-2.5" placeholder="john.doe@email.com"  required>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="fd-email">
+                    Email
+                </label>
+                <input name="fd-email"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="fd-email" type="email" placeholder="john.doe@email.com" required>
             </div>
-            <div class="">
-                <label for="message">Message:</label>
-                <textarea name="fd-message" id="message" rows="5" required></textarea>
+            <div class="mb-4">
+                <label for="fd-message" class="block text-gray-700 text-sm font-bold mb-2">
+                    Message
+                </label>
+                <textarea name="fd-message" id="fd-message" cols="" rows="5" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Leave a comment..." required></textarea>
             </div>
-            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>
-        </div>
-    </form>
+            <div class="flex items-center justify-between">
+                <button
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                    type="submit">
+                    Submit
+                </button>
+            </div>
+        </form>
+    </div>
+
     {% include 'footer.html' %}
 </body>
+
 </html>

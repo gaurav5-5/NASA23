@@ -41,42 +41,23 @@ def index():
 @app.route('/feedback', methods=['GET', 'POST'])
 def feedback():
     if request.method == 'POST':
-        if 'rprt-name' in request.form:
-            na = request.form.get('rprt-name')
-            em = request.form.get('rprt-email')
-            msg = request.form.get('rprt-message')
-            print(na,em,msg)
+       
+        na = request.form.get('fd-name')
+        em = request.form.get('fd-email')
+        msg = request.form.get('fd-message')
+        print(na,em,msg)
 
-            # check if table exists
-            query_db(REPORT,
-                "CREATE TABLE IF NOT EXISTS feedback (name TEXT, email TEXT, feedback TEXT)")
+        # check if table exists
+        query_db(FEEDBACK,
+            "CREATE TABLE IF NOT EXISTS feedback (name TEXT, email TEXT, feedback TEXT)")
 
-            # Insert data into database
-            query_db(REPORT,
-                     "INSERT INTO feedback (name, email, feedback) VALUES (?, ?, ?)",
-                     (na, em, msg), commit=True)
-            
-            # flash('Reported Successfully!', category='success')
-
-            # return render_template('feedback_success.html', title='Contact Us!')
+        # Insert data into database
+        query_db(FEEDBACK,
+                "INSERT INTO feedback (name, email, feedback) VALUES (?, ?, ?)",
+                (na, em, msg), commit=True)
         
-        else:
-            na = request.form.get('fd-name')
-            em = request.form.get('fd-email')
-            msg = request.form.get('fd-message')
-            print(na,em,msg)
-
-            # check if table exists
-            query_db(FEEDBACK,
-                "CREATE TABLE IF NOT EXISTS feedback (name TEXT, email TEXT, feedback TEXT)")
-
-            # Insert data into database
-            query_db(FEEDBACK,
-                    "INSERT INTO feedback (name, email, feedback) VALUES (?, ?, ?)",
-                    (na, em, msg), commit=True)
-            
-            # flash('Thank you for your feedback!', category='success')
-            
+        # flash('Thank you for your feedback!', category='success')
+        
 
         return render_template('feedback_success.html', title='Contact Us!')
     return render_template('feedback.html', title='Feedback')
