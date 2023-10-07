@@ -8,9 +8,7 @@ body {
     margin-left: 20px;
 }
 
-.body-color {
-    @apply bg-gray-900;
-}
+
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
         monospace;
