@@ -16,6 +16,8 @@ def index():
 
 @app.route('/feedback', methods=['GET', 'POST'])
 def feedback():
+    if request.method == 'POST':
+        return render_template('feedback_success.html', title='Contact Us!')
     return render_template('feedback.html', title='Feedback')
 
 
