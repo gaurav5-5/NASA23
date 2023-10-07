@@ -41,17 +41,18 @@ def index():
 @app.route('/feedback', methods=['GET', 'POST'])
 def feedback():
     if request.method == 'POST':
-        na = request.form
-        # em = request.form['feedback']['email']
-        # fd = request.form['feedback']['message']
-        print(na)
-        # check if table exists
-        # query_db(
-        #     "CREATE TABLE IF NOT EXISTS feedback (name TEXT, email TEXT, feedback TEXT)")
+        na = request.form.get('fd-name')
+        em = request.form.get('fd-email')
+        msg = request.form.get('fd-message')
+        print(na,em,msg)
 
-        # # Insert data into database
-        # query_db("INSERT INTO feedback (name, email, feedback) VALUES (?, ?, ?)",
-        #          (na, em, fd), commit=True)
+        # check if table exists
+        query_db(
+            "CREATE TABLE IF NOT EXISTS feedback (name TEXT, email TEXT, feedback TEXT)")
+
+        # Insert data into database
+        query_db("INSERT INTO feedback (name, email, feedback) VALUES (?, ?, ?)",
+                 (na, em, msg), commit=True)
 
         return render_template('feedback_success.html', title='Contact Us!')
     return render_template('feedback.html', title='Feedback')
