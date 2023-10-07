@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
     {% include 'scripts.html' %}
 </head>
 <body>
@@ -12,11 +13,17 @@
     <h1>Send us your Feedback!</h1>
     <div>
         <form action="">
+            <label for="name">Name:</label>
             <input type="text" name="feedback" id="name">
+
+            <label for="email">Email:</label>
             <input type="email" name="feedback" id="email">
-            <input type="text" name="feedback" id="message">
+
+            <label for="message">Message:</label>
+            <textarea name="feedback" id="message" rows="5"></textarea>
+            <input type="submit" value="Submit">
         </form>
     </div>
-    
+    {% include 'footer.html' %}
 </body>
 </html>
