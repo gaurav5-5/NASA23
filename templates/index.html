@@ -1,8 +1,10 @@
 <head>
     <title>{{ title }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
-
+    {% include 'scripts.html' %}
+</head>
 <body>
+    {% include 'nav.html' %}
     <div class="App">
         <header class="App-header">
             <img src="{{ url_for('static', filename='Octocat.png') }}" class="App-logo" alt="logo" />
@@ -12,8 +14,12 @@
             <p class="small">
                 Edit <code>templates/index.html</code> and refresh to see your changes!
             </p>
+                <form action="" method="post">
+                    <button type="submit" name="nav" value="feedback">
+                        Contact Us!
+                    </button>
+                </form>
         </header>
     </div>
 </body>
-
 </html>
