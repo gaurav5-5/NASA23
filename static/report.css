@@ -24,12 +24,12 @@ svg {
     width: 24px;
     height: 12px;
    }
-   &:hover {
+   /* &:hover {
     background-color: #E8E8E8;
         svg {
         fill: #000000;
        }
-   }
+   } */
 
 /* Text meant only for screen readers. */
 .screen-reader-text {
