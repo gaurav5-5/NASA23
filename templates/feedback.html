@@ -4,9 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
+    {% include 'scripts.html' %}
 </head>
 <body>
-    <h1>We'd Love to Hear from You!</h1>
+    {% include 'nav.html' %}
+    
+    <h1>Send us your Feedback!</h1>
+    <div>
+        <form action="">
+            <input type="text" name="feedback" id="name">
+            <input type="email" name="feedback" id="email">
+            <input type="text" name="feedback" id="message">
+        </form>
+    </div>
     
 </body>
 </html>
