@@ -5,6 +5,7 @@ body {
         sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    margin-left: 20px;
 }
 
 code {
@@ -89,6 +90,7 @@ form {
     display: flex;
     flex-direction: column;
     max-width: 400px;
+    margin-left: 20px;
 }
 label {
     margin-bottom: 0.5rem;
