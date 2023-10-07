@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='feedback.css') }}">
     {% include 'scripts.html' %}
 </head>
 <body>
@@ -12,7 +13,7 @@
     
     <h1 style="margin-left: 20px;">Send us your Feedback!</h1>
     <div>
-        <form action="" method="post">
+        <form action="" method="post" class="fd-form">
             <div>
                 <label for="name">Name:</label>
                 <input type="text" name="fd-name" id="name" required>
