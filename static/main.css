@@ -80,37 +80,3 @@ code {
     display: block;
   }
 
-  /*for feedback.html*/
-h1 {
-    color: #333;
-    font-size: 2rem;
-    margin-bottom: 1rem;
-}
-form {
-    display: flex;
-    flex-direction: column;
-    max-width: 400px;
-    margin-left: 20px;
-}
-label {
-    margin-bottom: 0.5rem;
-}
-input[type="text"],
-input[type="email"],
-textarea {
-    padding: 0.5rem;
-    margin-bottom: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-input[type="submit"] {
-    background-color: rgb(31 41 55);
-    color: #fff;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-input[type="submit"]:hover {
-    background-color: #131dd4;
-}
