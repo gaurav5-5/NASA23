@@ -1,13 +1,19 @@
-# GitHub Codespaces ♥️ Flask
+# NASA Spaceapps Challenge 2023
 
-Welcome to your shiny new Codespace running Flask! We've got everything fired up and running for you to explore Flask.
+Frontend for a fire data representation web-app
+Gets data from model hosted at [repository](#) and displays as different graph views
 
-You've got a blank canvas to work on from a git perspective as well. There's a single initial commit with the what you're seeing right now - where you go from here is up to you!
-
-Everything you do here is contained within this one codespace. There is no repository on GitHub yet. If and when you’re ready you can click "Publish Branch" and we’ll create your repository and push up your project. If you were just exploring then and have no further need for this code then you can simply delete your codespace and it's gone forever.
+### Dependencies
+1. Flask
+  ```bash
+  $ pip install FLask
+  ```
+2. TailwindCSS
+3. FlowbiteJS
+4. Charts.js
+5. sqlite3
 
 To run this application:
-
-```
+```python3
 flask --debug run
 ```
