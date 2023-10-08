@@ -8,14 +8,17 @@
     {% include 'scripts.html' %}
 </head>
 
-<body>
+<body class="bg-gray-100">
     {% include 'nav.html' %}
 
 
-    <div class="w-full max-w-md md:max-w-xl text-left">
-        <h1 class="px-4 py-2 text-2xl font-display text-4xl font-bold underline">Send us your Feedback!</h1>
+    <div>
+        <header class="bg-white-600 bg-opacity-20 text-white py-4">
+        <h1 class="text-4xl font-bold text-center"><u>Send us your Feedback!</u></h1>
+        </header>
+
         <form class="px-8 pt-6 pb-5 mb-3" method="post" action="">
-            <div class="mb-4">
+            <div class="max-w-4xl mx-auto my-8 p-6 bg-white shadow-lg rounded-lg">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="fd-name">
                     Name
                 </label>
@@ -23,7 +26,7 @@
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     id="fd-name" type="text" placeholder="John Doe" required>
             </div>
-            <div class="mb-4">
+            <div class="max-w-4xl mx-auto my-8 p-6 bg-white shadow-lg rounded-lg">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="fd-email">
                     Email
                 </label>
@@ -31,13 +34,13 @@
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     id="fd-email" type="email" placeholder="john.doe@email.com" required>
             </div>
-            <div class="mb-4">
+            <div class="max-w-4xl mx-auto my-8 p-6 bg-white shadow-lg rounded-lg">
                 <label for="fd-message" class="block text-gray-700 text-sm font-bold mb-2">
                     Message
                 </label>
                 <textarea name="fd-message" id="fd-message" cols="" rows="5" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Leave a comment..." required></textarea>
             </div>
-            <div class="flex items-center justify-between">
+            <div class="flex items-center justify-center">
                 <button
                     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                     type="submit">
