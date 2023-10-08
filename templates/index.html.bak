@@ -1,65 +1,132 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{ title }}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+<!-- <div>
+<canvas id="myChart" style="max-width: 100%; height: auto;"></canvas>
+</div>
+<script>
+var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
+var yValues = [55, 49, 44, 24, 15];
+var barColors = [
+  "#b91d47",
+  "#00aba9",
+  "#2b5797",
+  "#e8c3b9",
+  "#1e7145"
+];
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://kit.fontawesome.com/52a68816aa.js" crossorigin="anonymous"></script>
+new Chart("myChart", {
+  type: "pie",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues
+    }]
+  },
+  options: {
+    title: {
+      display: true,
+      text: "World Wide Wine Production 2018"
+    }
+  } -->
+<div style="display: flex; justify-content: space-between;">
+    <div class="chart-container">
+        <canvas id="chart1"></canvas>
+    </div>
+    <div class="chart-container">
+        <canvas id="chart2" style="max-width: 100%; height: auto;"></canvas>
+    </div>
+    <div class="chart-container">
+        <canvas id="chart3" style="max-width: 100%; height: auto;"></canvas>
+    </div>
+</div>
 
-</head>
-<body>
-    <header class="bg-gray-800 text-white flex justify-between items-center px-4 py-3">
-        <div>
-            <a href="#" class="font-bold text-xl">FireForcasters</a>
-        </div>
-        <nav class="ml-auto">
-            <ul class="flex space-x-4">
-                <li><a href="#" class="hover:text-gray-300">Home</a></li>
-                <li><a href="#" class="hover:text-gray-300">Protocol</a></li>
-                <li><a href="#" class="hover:text-gray-300">About</a></li>
-            </ul>
-        </nav>
-        <div class="dropdown">
-            <button class="dropbtn"><i class="fa-solid fa-bars" alt="menu"></i></button>
-            <div class="dropdown-content">
-                <a href="#">About</a>
-                <a href="#">Feedback</a>
-            </div>
-        </div>
-    </header>
-    <!-- <div class="App">
-        <header class="App-header">
-            <img src="{{ url_for('static', filename='Octocat.png') }}" class="App-logo" alt="logo" />
-            <p>
-                GitHub Codespaces <span class="heart">♥️</span> Flask
-            </p>
-            <p class="small">
-                Edit <code>templates/index.html</code> and refresh to see your changes!
-            </p>
-        </header>
-    </div> -->
+<script>
+    var xValues1 = ["Italy", "France", "Spain", "USA", "Argentina"];
+    var yValues1 = [55, 49, 44, 24, 15];
+    var barColors1 = [
+        "#b91d47",
+        "#00aba9",
+        "#2b5797",
+        "#e8c3b9",
+        "#1e7145"
+    ];
+    var chartOptions = {
+        legend: {
+            display:false
+        },
+    };
 
-    <footer class="bg-gray-800 text-white py-4 fixed bottom-0 w-full">
-        <div class="container mx-auto flex justify-between items-center">
-            <div>
-                <p>&copy; 2023 FireForcasters</p>
-            </div>
-            <div>
-                <ul class="flex space-x-4">
-                    <!-- <li><a class="hover:text-gray-300">Privacy Policy</a></li>
-                    <li><a class="hover:text-gray-300">Terms of Service</a></li> -->
-                    <li>
-                        <a class="hover:text-gray-300">Contact Us -&nbsp;Ph.: 1234567890 &nbsp;&nbsp; email: abc@gmail.com</a>
-                        <!-- <p>
-                            Ph.: 1234567890
-                            email: abc@gmail.com
-                        </p> -->
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </footer>
-</body>
+    new Chart("chart1", {
+        type: "pie",
+        data: {
+            labels: xValues1,
+            datasets: [{
+                backgroundColor: barColors1,
+                data: yValues1
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: "World Wide Wine Production 2018"
+            },
+            // legend: {
+            //     display: false
+            // }
+        }
+    });
 
-</html>
+    var xValues2 = ["Italy", "France", "Spain", "USA", "Argentina"];
+    var yValues2 = [35, 29, 24, 14, 10];
+    var barColors2 = [
+        "#b91d47",
+        "#00aba9",
+        "#2b5797",
+        "#e8c3b9",
+        "#1e7145"
+    ];
+
+    new Chart("chart2", {
+        type: "pie",
+        data: {
+            labels: xValues2,
+            datasets: [{
+                backgroundColor: barColors2,
+                data: yValues2
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: "World Wide Wine Production 2019"
+            }
+        }
+    });
+
+    var xValues3 = ["Italy", "France", "Spain", "USA", "Argentina"];
+    var yValues3 = [45, 39, 34, 20, 12];
+    var barColors3 = [
+        "#b91d47",
+        "#00aba9",
+        "#2b5797",
+        "#e8c3b9",
+        "#1e7145"
+    ];
+
+    new Chart("chart3", {
+        type: "pie",
+        data: {
+            labels: xValues3,
+            datasets: [{
+                backgroundColor: barColors3,
+                data: yValues3
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: "World Wide Wine Production 2020"
+            }
+        }
+    });
+</script>
+</script>
