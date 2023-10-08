@@ -1,3 +1,4 @@
+import model as model
 import sqlite3
 from flask import Flask, render_template, request, g
 
@@ -81,6 +82,17 @@ def about():
 def protocol():
     return render_template('protocol.html', title='Protocol')
 
+@app.route('/get_area', methods=['GET', 'POST'])
+def get_data():
+    return model.get_area()
+
+@app.route('/get_frp', methods=['GET', 'POST'])
+def get_frp():
+    return model.get_frp()
+
+@app.route('/get_bti4', methods=['GET', 'POST'])
+def get_bti4():
+    return model.get_bti4()
 
 if __name__ == '__main__':
     app.run(debug=True)
