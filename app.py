@@ -30,7 +30,25 @@ def query_db(query, args=(), one=False, commit=False):
     return (rv[0] if rv else None) if one else rv
 
 
-def update_db(req):
+def update_db(req, table=None):
+    if table is not None:
+        if table == 'report':
+            query_db(
+                f"CREATE TABLE IF NOT EXISTS {table} (message TEXT)")
+        else:
+            query_db(
+                f"CREATE TABLE IF NOT EXISTS {table} (name TEXT, email TEXT, feedback TEXT)")
+
+        # Insert data into database
+        if table == 'feedback':
+            query_db(
+                    f"INSERT INTO {table} (name, email, feedback) VALUES (?, ?, ?)",
+                    (req.form.get('fd-name'), req.form.get('fd-email'), req.form.get('fd-message')), commit=True)
+        elif table == 'report':
+            query_db(
+                    f"INSERT INTO {table} (message) VALUES (?)",
+                    (req.form.get('rprt-message')), commit=True)
+
 
 
 
@@ -44,35 +62,13 @@ def index():
 @app.route('/feedback', methods=['GET', 'POST'])
 def feedback():
     if request.method == 'POST':
-        if 'fd-name' in request.form and 'fd-email' in request.form and 'fd-message' in request.form:
-            na = request.form.get('fd-name')
-            em = request.form.get('fd-email')
-            msg = request.form.get('fd-message')
-            print(na,em,msg)
-
-            # check if table exists
-            query_db(
-                "CREATE TABLE IF NOT EXISTS feedback (name TEXT, email TEXT, feedback TEXT)")
-
-            # Insert data into database
-            query_db(
-                    "INSERT INTO feedback (name, email, feedback) VALUES (?, ?, ?)",
-                    (na, em, msg), commit=True)
-        
-            return render_template('feedback_success.html', title='Contact Us!')
+        if 'fd-message' in request.form:
+            update_db(request, table='feedback')
+            return render_template('feedback.html', title='Feedback')
         elif 'rprt-message' in request.form:
-            msg = request.form.get('rprt-message')
-            print(msg)
-
-            # check if table exists
-            query_db(
-                "CREATE TABLE IF NOT EXISTS report (name TEXT, email TEXT, feedback TEXT)")
-
-            # Insert data into database
-            query_db(
-                    "INSERT INTO report (name, email, feedback) VALUES (?, ?, ?)",
-                    (na, em, msg), commit=True)
-
+            update_db(request, table='report')
+            return render_template('index.html', title='Fire Forecasters')
+        
     return render_template('feedback.html', title='Feedback')
 
 
