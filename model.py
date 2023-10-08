@@ -1,5 +1,5 @@
 # import libraries
-from flask import jsonify, request, Blueprint
+from flask import jsonify, request
 
 import requests # https
 import pandas as pd #dataframe
@@ -97,47 +97,43 @@ def graph_datas(name, key=MAP_KEY):
 
 
 def get_area():
-    if request.method == "GET":
-        cntr = ["ITA", "ARG", "SPA", "USA", "IND"]
-        cntrn = ["Italy", "Argentina", "Spain", "USA", "India"]
-        areas = []
-        for c in cntr:
+    cntr = ["ITA", "ARG", "SPA", "USA", "IND"]
+    cntrn = ["Italy", "Argentina", "Spain", "USA", "India"]
+    areas = []
+    for c in cntr:
+        try:
             url = f"https://firms.modaps.eosdis.nasa.gov/api/country/csv/{MAP_KEY}/VIIRS_SNPP_NRT/{c}/1/"
             data = pd.read_csv(url)
             calc = calculate_damaged_area_coordinates(data['latitude'], data['longitude'])
             areas.append(calc)
+        except:
+            pass
 
-        return jsonify({"countries": cntrn,"area": areas})
-
-    return jsonify({"error":"Invalid request method"})
+    return jsonify({"area": areas})
 
 def get_frp():
-    if request.method == "GET":
-        cntr = ["ITA", "ARG", "SPA", "USA", "IND"]
-        cntrn = ["Italy", "Argentina", "Spain", "USA", "India"]
-        frp = []
-        for c in cntr:
-            url = f"https://firms.modaps.eosdis.nasa.gov/api/country/csv/{MAP_KEY}/VIIRS_SNPP_NRT/{c}/1/"
-            data = pd.read_csv(url)
-            frp.append(data['frp'].mean())
+    cntr = ["ITA", "ARG", "SPA", "USA", "IND"]
+    cntrn = ["Italy", "Argentina", "Spain", "USA", "India"]
+    frp = []
+    for c in cntr:
+        url = f"https://firms.modaps.eosdis.nasa.gov/api/country/csv/{MAP_KEY}/VIIRS_SNPP_NRT/{c}/1/"
+        data = pd.read_csv(url)
+        frp.append(data['frp'].mean())
 
-        return jsonify({"countries": cntrn,"frp": frp})
+    return jsonify({"frp": frp})
 
-    return jsonify({"error":"Invalid request method"})
 
 def get_bti4():
-    if request.method == "GET":
-        cntr = ["ITA", "ARG", "SPA", "USA", "IND"]
-        cntrn = ["Italy", "Argentina", "Spain", "USA", "India"]
-        bti4 = []
-        for c in cntr:
-            url = f"https://firms.modaps.eosdis.nasa.gov/api/country/csv/{MAP_KEY}/VIIRS_SNPP_NRT/{c}/1/"
-            data = pd.read_csv(url)
-            bti4.append(data['bright_ti4'].mean())
+    cntr = ["ITA", "ARG", "SPA", "USA", "IND"]
+    cntrn = ["Italy", "Argentina", "Spain", "USA", "India"]
+    bti4 = []
+    for c in cntr:
+        url = f"https://firms.modaps.eosdis.nasa.gov/api/country/csv/{MAP_KEY}/VIIRS_SNPP_NRT/{c}/1/"
+        data = pd.read_csv(url)
+        bti4.append(data['bright_ti4'].mean())
 
-        return jsonify({"countries": cntrn,"bti4": bti4})
+    return jsonify({"bti4": bti4})
 
-    return jsonify({"error":"Invalid request method"})
 
 
 # Main function

@@ -1,12 +1,18 @@
 import model as model
 import sqlite3
-from flask import Flask, render_template, request, g
+from flask import Flask, render_template, request, g, jsonify
+import pandas as pd
+
+import geopandas as gpd
+from shapely.geometry import Point, Polygon
+import matplotlib.pyplot as plt # matplotlib
 
 app = Flask(__name__)
 
 
 # Sqlite3 code
 DATABASE = 'data/userip.db'
+MAP_KEY = "c4f9c87a128b458b6a69d96cfc2e3e60"
 
 def get_db():
     db = getattr(g, '_database', None)
@@ -54,10 +60,80 @@ def update_db(req, table=None):
 
 
 
+
+# data fetching"]
+
+def calculate_damaged_area_coordinates(latitude, longitude):
+    # Create a Polygon object from latitudes and longitudes
+    damaged_area_polygon = Polygon(zip(longitude, latitude))
+
+    # Create a GeoDataFrame
+    gdf = gpd.GeoDataFrame(geometry=[damaged_area_polygon])
+    # Set the Coordinate Reference System (CRS) to WGS 84
+    gdf.crs = "EPSG:4326"
+
+    # Calculate the damaged area in square degrees
+    damaged_area_square_degrees = gdf.geometry.area.values[0]
+    
+    return damaged_area_square_degrees
+
+
+
+
 # app routes
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template('index.html', title='Fire Forecasters')
+
+    cntrn = ["Italy", "Argentina", "Spain", "USA", "India"]
+    cntr = ["ITA", "ARG", "SPA", "USA", "IND"]
+
+    frp = []
+    area = []
+    bti4 = []
+
+    for c in cntr:
+        url = f"https://firms.modaps.eosdis.nasa.gov/api/country/csv/{MAP_KEY}/VIIRS_SNPP_NRT/{c}/1/"
+        data = pd.read_csv(url)
+        frp.append(data['frp'].mean())
+        calc = calculate_damaged_area_coordinates(data['latitude'], data['longitude'])
+        area.append(calc)
+        bti4.append(data['bright_ti4'].mean())
+    
+    return render_template('index.html', title='Fire Forecasters', frp=frp, area=area, bti4=bti4, countries=cntrn)
+
+
+
+
+
+
+
+# @app.route('/get_area')
+# def get_area():
+#     return areas
+
+@app.route('/get_frp')
+def get_frp():
+    cntr = ["ITA", "ARG", "SPA", "USA", "IND"]
+    frp = []
+    for c in cntr:
+        url = f"https://firms.modaps.eosdis.nasa.gov/api/country/csv/{MAP_KEY}/VIIRS_SNPP_NRT/{c}/1/"
+        data = pd.read_csv(url)
+        frp.append(data['frp'].mean())
+
+    return jsonify({"frp": frp})
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @app.route('/feedback', methods=['GET', 'POST'])
@@ -80,19 +156,26 @@ def about():
 
 @app.route('/emergency', methods=['GET', 'POST'])
 def emergency():
-    return render_template('emergency.html', title='Protocol')
+    return render_template('emergency.html', title='Emergency Catalogue')
 
-@app.route('/get_area', methods=['GET', 'POST'])
-def get_data():
-    return model.get_area()
 
-@app.route('/get_frp', methods=['GET', 'POST'])
-def get_frp():
-    return model.get_frp()
 
-@app.route('/get_bti4', methods=['GET', 'POST'])
-def get_bti4():
-    return model.get_bti4()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
