@@ -78,9 +78,9 @@ def about():
     return render_template('about.html', title='About')
 
 
-@app.route('/protocol', methods=['GET', 'POST'])
-def protocol():
-    return render_template('protocol.html', title='Protocol')
+@app.route('/emergency', methods=['GET', 'POST'])
+def emergency():
+    return render_template('emergency.html', title='Protocol')
 
 @app.route('/get_area', methods=['GET', 'POST'])
 def get_data():
