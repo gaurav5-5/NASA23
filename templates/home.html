@@ -53,7 +53,7 @@ new Chart("myChart", {
     ];
     var chartOptions = {
         legend: {
-            display:false
+            display: false,
         },
     };
 
@@ -66,7 +66,14 @@ new Chart("myChart", {
                 data: yValues1
             }]
         },
-        options: chartOptions
+        options: {
+            Plugin:{            legend: {
+                labels: {
+                    fontsize:0,
+                },
+            },
+        }
+        }
     });
 
     var xValues2 = ["Italy", "France", "Spain", "USA", "Argentina"];
