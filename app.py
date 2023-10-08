@@ -2,7 +2,7 @@ import model as model
 import sqlite3
 from flask import Flask, render_template, request, g, jsonify
 import pandas as pd
-import numpy    as np
+import numpy  as np
 
 import geopandas as gpd
 from shapely.geometry import Point, Polygon
@@ -60,65 +60,80 @@ def update_db(req, table=None):
 
 
 # data visualization
-def pie_areas():
-    
-    cntr = ["ITA", "ARG", "SPA", "USA", "IND"]
-    cntrn = ["Italy", "Argentina", "Spain", "USA", "India"]
-    areas = []
-    for c in cntr:
-        df = pd.read_csv(f'https://firms.modaps.eosdis.nasa.gov/api/country/csv/{MAP_KEY}/VIIRS_SNPP_NRT/{c}/1/')
-        areas.append(calculate_damaged_area_coordinates(df['latitude'], df['longitude']))
+countries = ["ITA", "ARG", "USA", "IND", "ESP"]
+countries_n = ["Italy", "Argentina", "United States of America", "India", "Spain"]
+MAP_KEY = 'c4f9c87a128b458b6a69d96cfc2e3e60'
 
-    plt.pie(np.array(areas), labels=cntrn)
-    plt.savefig(f'static/images/area.png')
+
+# def pie_areas():
+    
+#     areas = []
+#     for c in countries:
+#         try:
+#             df = pd.read_csv(f'https://firms.modaps.eosdis.nasa.gov/api/country/csv/{MAP_KEY}/VIIRS_SNPP_NRT/{c}/1/')
+#             lat, lon = df['latitude'], df['longitude']
+#             areas.append(calculate_damaged_area_coordinates(lat, lon))
+#         except KeyError:
+#             areas.append(0)
+
+#     plt.pie(np.array(areas), labels=countries_n)
+#     plt.title('Areas')
+#     plt.axis('equal')
+#     plt.savefig("static/areas.png", transparent=True)
 
 
 
 def pie_frp():
     
-    countries = ["ITA", "ARG", "USA", "IND", "ESP"]
-    countries_n = ["Italy", "Argentina", "United States of America", "India", "Spain"]
-    MAP_KEY = 'c4f9c87a128b458b6a69d96cfc2e3e60'
 
     frp = []
 
     for c in countries:
+        try:
+            df = pd.read_csv(f'https://firms.modaps.eosdis.nasa.gov/api/country/csv/{MAP_KEY}/VIIRS_SNPP_NRT/{c}/1/')
+            col = df['frp']
+            cm = col.mean()
+            cm = f"{cm:.3f}"
+            cm = float(cm)
+            frp.append(cm)
+        except KeyError:
+            frp.append(0)
 
-        df = pd.read_csv(f'https://firms.modaps.eosdis.nasa.gov/api/country/csv/{MAP_KEY}/VIIRS_SNPP_NRT/{c}/1/')
-        col = df['frp']
-        cm = col.mean()
-        cm = f"{cm:.3f}"
-        cm = float(cm)
-        frp.append(cm)
+    y = np.array(frp)
+    print(y)
 
-        y = np.array(frp)
-        print(y)
+    # Create the Pie Chart
+    plt.pie(y, labels=countries_n, autopct='%1.1f%%', startangle=140)
 
-        # Create the Pie Chart
-        plt.pie(y, labels=countries_n, autopct='%1.1f%%', startangle=140)
+    # Customize the Pie Chart
+    plt.title('FRP')
+    plt.axis('equal')
+    # plt.legend()
 
-        # Customize the Pie Chart
-        plt.title('FRP')
-        plt.axis('equal')
-        # plt.legend()
-
-        # Display the Chart
-        plt.show()
-        plt.savefig("{{ url_for('static', '/images/frp.png') }}", transparent=True)
+    # Display the Chart
+    plt.show()
+    plt.savefig("static/frp.png", transparent=True)
 
 
 
 def pie_bti4():
     
-    cntr = ["ITA", "ARG", "SPA", "USA", "IND"]
-    cntrn = ["Italy", "Argentina", "Spain", "USA", "India"]
     bti4 = []
-    for c in cntr:
-        df = pd.read_csv(f'https://firms.modaps.eosdis.nasa.gov/api/country/csv/{MAP_KEY}/VIIRS_SNPP_NRT/{c}/1/')
-        bti4.append(df['bright_ti4'].mean())
+    for c in countries:
+        try:
+            df = pd.read_csv(f'https://firms.modaps.eosdis.nasa.gov/api/country/csv/{MAP_KEY}/VIIRS_SNPP_NRT/{c}/1/')
+            col = df['bright_ti4']
+            btim = col.mean()
+            btim = f"{btim:.3f}"
+            btim = float(btim)
+            bti4.append(btim)
+        except KeyError:
+            bti4.append(0)
 
-    plt.pie(np.array(bti4), labels=cntrn)
-    plt.savefig(f'static/images/bti4.png')
+    plt.pie(np.array(bti4), labels=countries_n)
+    plt.title('BTI4')
+    plt.axis('equal')
+    plt.savefig("static/bti4.png", transparent=True)
 
 
 # data fetching"]
@@ -144,7 +159,7 @@ def calculate_damaged_area_coordinates(latitude, longitude):
 @app.route('/', methods=['GET', 'POST'])
 def index():
 
-    pie_areas()
+    # pie_areas()
     pie_bti4()
     pie_frp()
     
