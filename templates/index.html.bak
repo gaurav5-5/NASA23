@@ -13,7 +13,7 @@ var barColors = [
 ];
 
 new Chart("myChart", {
-  type: "pie",
+  type: "doughnut",
   data: {
     labels: xValues,
     datasets: [{
@@ -27,15 +27,17 @@ new Chart("myChart", {
       text: "World Wide Wine Production 2018"
     }
   } -->
-<div style="display: flex; justify-content: space-between;">
+
+  
+<div style="display: flex; justify-content: center;">
     <div class="chart-container">
         <canvas id="chart1"></canvas>
     </div>
     <div class="chart-container">
-        <canvas id="chart2" style="max-width: 100%; height: auto;"></canvas>
+        <canvas id="chart2"></canvas>
     </div>
     <div class="chart-container">
-        <canvas id="chart3" style="max-width: 100%; height: auto;"></canvas>
+        <canvas id="chart3"></canvas>
     </div>
 </div>
 
@@ -51,27 +53,26 @@ new Chart("myChart", {
     ];
     var chartOptions = {
         legend: {
-            display:false
+            display: false,
         },
     };
 
     new Chart("chart1", {
-        type: "pie",
+        type: "doughnut",
         data: {
             labels: xValues1,
             datasets: [{
-                backgroundColor: barColors1,
+                //backgroundColor: barColors1,
                 data: yValues1
             }]
         },
         options: {
-            title: {
-                display: true,
-                text: "World Wide Wine Production 2018"
+            Plugin:{            legend: {
+                labels: {
+                    fontsize:0,
+                },
             },
-            // legend: {
-            //     display: false
-            // }
+        }
         }
     });
 
@@ -86,20 +87,15 @@ new Chart("myChart", {
     ];
 
     new Chart("chart2", {
-        type: "pie",
+        type: "doughnut",
         data: {
             labels: xValues2,
             datasets: [{
-                backgroundColor: barColors2,
+                //backgroundColor: barColors2,
                 data: yValues2
             }]
         },
-        options: {
-            title: {
-                display: true,
-                text: "World Wide Wine Production 2019"
-            }
-        }
+        options: chartOptions
     });
 
     var xValues3 = ["Italy", "France", "Spain", "USA", "Argentina"];
@@ -113,20 +109,14 @@ new Chart("myChart", {
     ];
 
     new Chart("chart3", {
-        type: "pie",
+        type: "doughnut",
         data: {
             labels: xValues3,
             datasets: [{
-                backgroundColor: barColors3,
+                //backgroundColor: barColors3,
                 data: yValues3
             }]
         },
-        options: {
-            title: {
-                display: true,
-                text: "World Wide Wine Production 2020"
-            }
-        }
+        options: chartOptions
     });
-</script>
 </script>
