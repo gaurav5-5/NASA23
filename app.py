@@ -62,9 +62,9 @@ def index():
 @app.route('/feedback', methods=['GET', 'POST'])
 def feedback():
     if request.method == 'POST':
-        if 'fd-message' in request.form:
+        if 'fd-message' in request.form.keys():
             update_db(request, table='feedback')
-            return render_template('feedback.html', title='Feedback')
+            return render_template('feedback_success.html', title='Feedback')
         elif 'rprt-message' in request.form:
             update_db(request, table='report')
             return render_template('index.html', title='Fire Forecasters')

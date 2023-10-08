@@ -8,6 +8,10 @@ module.exports = {
                 'nav-fg': '#007aff',
             },
         },
+        fontFamily: {
+            display: ['Red Hat Display', 'sans-serif'],
+            sans: ['Onest', 'sans-serif'],
+        },
     },
     variants: {},
     plugins: [],
