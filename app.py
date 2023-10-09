@@ -1,6 +1,7 @@
 import model as model
 import sqlite3
-from flask import Flask, render_template, request, g, jsonify
+import os.path
+from flask import Flask, render_template, request, g, jsonify, url_for
 import pandas as pd
 import numpy  as np
 
@@ -85,7 +86,9 @@ MAP_KEY = 'c4f9c87a128b458b6a69d96cfc2e3e60'
 
 def pie_frp():
     
-
+    if  os.path.isfile('static/frp.png'):
+        return 
+        
     frp = []
 
     for c in countries:
@@ -117,7 +120,8 @@ def pie_frp():
 
 
 def pie_bti4():
-    
+    if  os.path.isfile('static/bti4.png'):
+        return 
     bti4 = []
     for c in countries:
         try:
